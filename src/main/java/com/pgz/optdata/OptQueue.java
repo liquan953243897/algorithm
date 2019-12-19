@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @author liquan@syxysoft.com
  * @date 2019-12-18
  */
-public class UserTask {
+public class OptQueue {
 
     //队列大小
     private final int QUEUE_LENGTH = 10000 * 10;
@@ -29,7 +29,7 @@ public class UserTask {
     /**
      * 构造函数，执行execute方法
      */
-    public UserTask() {
+    public OptQueue() {
         execute();
     }
 
