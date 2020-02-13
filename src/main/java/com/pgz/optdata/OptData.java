@@ -3,7 +3,7 @@ package com.pgz.optdata;
 /**
  * 操作数据
  *
- * @author liquan@syxysoft.com
+ * @author liquan_pgz@qq.com
  * @date 2019-12-18
  */
 public class OptData {
@@ -15,7 +15,7 @@ public class OptData {
      * @param index  要替换的数组位置
      * @param target 替换的目标数据
      * @return 替换后的新数组
-     * @author liquan@syxysoft.com
+     * @author liquan_pgz@qq.com
      * date 2019-12-18
      **/
     public static Object[] replaceValue(Object[] source, int index, Object... target) {

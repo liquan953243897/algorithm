@@ -12,7 +12,7 @@ import java.util.Random;
 /**
  * 根据Hash生成图片
  *
- * @author liquan@syxysoft.com
+ * @author liquan_pgz@qq.com
  * @date 2020-01-17
  */
 public class AvatarHelper {

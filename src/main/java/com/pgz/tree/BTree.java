@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.HashMap;
 
 /**
- * @author liquan@syxysoft.com
+ * @author liquan_pgz@qq.com
  * @date 2019-12-11
  */
 public class BTree {
@@ -32,7 +32,7 @@ public class BTree {
      *
      * @param data
      * @return
-     * @author liquan@syxysoft.com
+     * @author liquan_pgz@qq.com
      * date 2019-12-11
      **/
     public void insert(int data) {
@@ -51,7 +51,7 @@ public class BTree {
      * @param data
      * @param father
      * @return
-     * @author liquan@syxysoft.com
+     * @author liquan_pgz@qq.com
      * date 2019-12-11
      **/
     public void insert(int data, BTree father) {
@@ -93,7 +93,7 @@ public class BTree {
      * 前序遍历
      *
      * @return
-     * @author liquan@syxysoft.com
+     * @author liquan_pgz@qq.com
      * date 2019-12-11
      **/
     public static void queryF() {
@@ -108,7 +108,7 @@ public class BTree {
      *
      * @param tree
      * @return
-     * @author liquan@syxysoft.com
+     * @author liquan_pgz@qq.com
      * date 2019-12-11
      **/
     public static void queryF(BTree tree) {
@@ -131,7 +131,7 @@ public class BTree {
      * 中序遍历
      *
      * @return
-     * @author liquan@syxysoft.com
+     * @author liquan_pgz@qq.com
      * date 2019-12-11
      **/
     public static void queryC() {
@@ -146,7 +146,7 @@ public class BTree {
      * 中序遍历
      *
      * @return
-     * @author liquan@syxysoft.com
+     * @author liquan_pgz@qq.com
      * date 2019-12-11
      **/
     public static void queryC(BTree tree) {
@@ -167,7 +167,7 @@ public class BTree {
      * 后序遍历
      *
      * @return
-     * @author liquan@syxysoft.com
+     * @author liquan_pgz@qq.com
      * date 2019-12-11
      **/
     public static void queryR() {
@@ -182,7 +182,7 @@ public class BTree {
      * 后序遍历
      *
      * @return
-     * @author liquan@syxysoft.com
+     * @author liquan_pgz@qq.com
      * date 2019-12-11
      **/
     public static void queryR(BTree tree) {

@@ -5,7 +5,7 @@ import java.text.NumberFormat;
 /**
  * //TODO 添加类功能描述
  *
- * @author: liquan@syxysoft.com
+ * @author: liquan_pgz@qq.com
  * @date: 2018-10-16 14:28
  * @Version: 1.0
  */

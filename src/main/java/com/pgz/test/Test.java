@@ -14,7 +14,7 @@ import java.net.URL;
 /**
  * 好像是把浏览器页面生成图片
  *
- * @author liquan@syxysoft.com
+ * @author liquan_pgz@qq.com
  * @date 2019-12-18
  */
 public class Test extends JFrame {

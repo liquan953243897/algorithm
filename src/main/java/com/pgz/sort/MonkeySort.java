@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * 猴子排序
  *
- * @author liquan@syxysoft.com
+ * @author liquan_pgz@qq.com
  * @date 2020-01-07
  */
 public class MonkeySort {

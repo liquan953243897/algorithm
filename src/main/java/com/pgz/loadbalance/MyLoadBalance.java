@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 /**
  * //TODO 添加类功能描述
  *
- * @author: liquan@syxysoft.com
+ * @author: liquan_pgz@qq.com
  * @date: 2018-09-29 14:19
  * @Version: 1.0
  */
@@ -40,7 +40,7 @@ public class MyLoadBalance {
      *
      * @param ipList
      * @return
-     * @author liquan@syxysoft.com
+     * @author liquan_pgz@qq.com
      * date 2018/9/29
      **/
     public static String doSelect(List<String> ipList) {
@@ -61,7 +61,7 @@ public class MyLoadBalance {
      *
      * @param ipList
      * @return
-     * @author liquan@syxysoft.com
+     * @author liquan_pgz@qq.com
      * date 2018/9/29
      **/
     public static String doSelect2(List<String> ipList) {

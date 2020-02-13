@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 操作一下队列看看
  *
- * @author liquan@syxysoft.com
+ * @author liquan_pgz@qq.com
  * @date 2019-12-18
  */
 public class OptQueue {
@@ -67,7 +67,7 @@ public class OptQueue {
      * 玩一下队列的put方法
      *
      * @return
-     * @author liquan@syxysoft.com
+     * @author liquan_pgz@qq.com
      * date 2019-12-18
      **/
     public static void testQueuePut() {

@@ -7,7 +7,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * 睡眠排序
  *
- * @author liquan@syxysoft.com
+ * @author liquan_pgz@qq.com
  * @date 2020-01-07
  */
 public class SleepSort {
@@ -24,7 +24,7 @@ public class SleepSort {
      *
      * @param arr
      * @return
-     * @author liquan@syxysoft.com
+     * @author liquan_pgz@qq.com
      * date 2020-01-07
      **/
     public static List<Integer> sort(int[] arr) {
