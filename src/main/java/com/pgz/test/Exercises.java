@@ -154,4 +154,68 @@ public class Exercises {
 //        ret = x > 4 ? 9.9 : 9;//Required type:int Provided:double
         System.out.println("value is " + (x > 4 ? 9.9 : 9));
     }
+
+    /**
+     * 比较String 和StringBuilder、StringBuffer的性能
+     * 性能和速度维度比较 StringBuilder > StringBuffer > String
+     * StringBuilder    线程不安全的，用在单线程多字符串操作的场景
+     * StringBuffer     线程安全的，用在多线程多字符串操作的场景
+     * String           少量字符串操作的场景
+     *
+     * @return
+     * @author liquan_pgz@qq.com
+     * date 2020-02-29
+     **/
+    @Test
+    public void testString() {
+
+        Long start1 = System.currentTimeMillis();//获取开始时间
+        String str = "a";
+        for (int i = 0; i < 100000; i++)//重复10万次进行String变量加操作
+        {
+            str += "b";
+        }
+        Long end1 = System.currentTimeMillis();//获取结束时间
+        System.out.println("String花费时间：" + (end1 - start1));//打印出花费的时间
+
+        Long start2 = System.currentTimeMillis();
+        StringBuilder str2 = new StringBuilder("a");
+        for (int i = 0; i < 100000; i++)//重复10万次进行StringBuilder变量加操作
+        {
+            str2.append("b");
+        }
+        Long end2 = System.currentTimeMillis();
+        System.out.println("StringBuilder花费时间：" + (end2 - start2));
+
+        Long start3 = System.currentTimeMillis();
+        StringBuffer str3 = new StringBuffer("a");
+        for (int i = 0; i < 100000; i++)//重复10万次进行StringBuffer变量加操作
+        {
+            str3.append("b");
+        }
+        Long end3 = System.currentTimeMillis();
+        System.out.println("StringBuffer花费时间：" + (end3 - start3));
+    }
+
+    @Test
+    public void testStr() {
+        String string = "中华小曲库中华小曲库中华小曲库中华小曲库中华小曲库中华小曲库华小曲库";
+
+        char[] chs = new char[100];
+        chs = newChar();
+        string.getChars(0, string.length(), chs, 10);
+
+        for (char c : chs) {
+            System.out.println(c);
+        }
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(string);
+        System.out.println(builder);
+    }
+
+    private char[] newChar() {
+        return new char[1000];
+    }
+
 }
