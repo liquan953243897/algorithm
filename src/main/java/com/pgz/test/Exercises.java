@@ -1,10 +1,12 @@
 package com.pgz.test;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.junit.Test;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
@@ -308,13 +310,89 @@ public class Exercises {
         for (Plan plan : plans) {
             l.add(plan.getMode());
         }
+        new Plan().set_id("11").setEnd_time(new Date());
         return l;
     }
 
+    @Test
+    public void testArray() {
+        House[] a = new BieShu[2];
+        a[0] = new GaoLou();
+        a[1] = new BieShu();
+
+        for (House house : a) {
+            house.desc();
+        }
+        doArraySth(a);
+    }
+
+    @Test
+    public void testCollection() {
+        Collection<GaoLou> c = new ArrayList<>();
+        c.add(new GaoLou());
+        c.add(new GaoLou());
+        doCollectionSth(c);
+    }
+
+    private void doArraySth(House[] c) {
+        for (House house : c) {
+            house.desc();
+        }
+    }
+
+    private void doCollectionSth(Collection<? extends House> c) {
+        for (House house : c) {
+            house.desc();
+        }
+    }
+
+    @Test
+    public void testSwitch() {
+        System.out.println(getValue(2));
+    }
+
+    public static int getValue(int i) {
+        int res = 0;
+        switch (i) {
+            case 1:
+                res += i;
+            case 2:
+                res = res + i * 2;
+            case 3:
+                res = res + i * 3;
+        }
+        return res;
+    }
+
+    interface House {
+        void desc();
+    }
+
+    static class BieShu implements House {
+
+        @Override
+        public void desc() {
+            System.out.println("I`m a big BieShu!");
+        }
+    }
+
+    static class GaoLou implements House {
+
+        @Override
+        public void desc() {
+            System.out.println("I`m a big GaoLou, too!");
+        }
+    }
+
     @Data
+    @Accessors(chain = true     //chain的中文含义是链式的，设置为true，则setter方法返回当前对象
+//            ,fluent = true //fluent的中文含义是流畅的，设置为true，则getter和setter方法的方法名都是基础属性名，且setter方法返回当前对象
+            ,prefix = "p" //prefix的中文含义是前缀，用于生成getter和setter方法的字段名会忽视指定前缀
+    )
+
     static class Plan {
         private String _id;
-        private Date start_time;
+        private Date pStart_time;
         private Date end_time;
         private Integer mode;
     }
