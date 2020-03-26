@@ -1,6 +1,17 @@
 package com.pgz.test;
 
+import lombok.Data;
 import org.junit.Test;
+
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 列举一些练习题
@@ -216,6 +227,96 @@ public class Exercises {
 
     private char[] newChar() {
         return new char[1000];
+    }
+
+    public List<Plan> filterPlan(Time currentTime, List<Plan> plans) {
+        //当前任务
+        List<Plan> planList = new ArrayList<>();
+
+        if (plans == null || plans.size() == 0) {
+            return planList;
+        }
+
+        //获取当前时间的时间戳
+        long currentLongTime = currentTime.getTime();
+
+        //将当前任务过滤出来
+        List<Plan> currentPlans = plans.stream().filter(plan ->
+                plan.getStart_time().getTime() <= currentLongTime
+                        && plan.getEnd_time().getTime() >= currentLongTime)
+                .collect(Collectors.toList());
+
+        //将当前任务按开始时间排序
+        currentPlans = currentPlans.stream().sorted(Comparator.comparing(Plan::getStart_time).reversed()).collect(Collectors.toList());
+
+        if (currentPlans.isEmpty()) {
+            return planList;
+        }
+
+        //过滤出mode为0的任务
+        planList.addAll(currentPlans.stream().filter(plan -> plan.getMode() == 0).collect(Collectors.toList()));
+        currentPlans.removeAll(planList);
+        if (currentPlans.isEmpty()) {
+            return planList;
+        }
+
+        //获取任务mode为1的最晚的任务的下标
+        int index = -1;
+        for (int i = currentPlans.size() - 1; i >= 0; i--) {
+            if (currentPlans.get(i).getMode() == 1) {
+                index = i;
+            }
+        }
+
+        if (index == -1) {
+            return planList;
+        }
+
+        //将所有要执行的任务取出
+        List<Plan> secondList = currentPlans.subList(index, currentPlans.size());
+        planList.addAll(secondList);
+
+        //去重
+        Set<Plan> planSet = new HashSet<>(planList);
+
+        planList.clear();
+        planList.addAll(planSet);
+
+        //返回结果
+        return planList;
+    }
+
+    public List<Integer> filterPlanTime(List<Plan> list) {
+        List<Plan> plans = list.stream().sorted(Comparator.comparing(Plan::getStart_time).reversed()).collect(Collectors.toList());
+        Iterator<Plan> it = plans.iterator();
+        int i = 0;
+        Plan last = null;
+        while (it.hasNext()) {
+            Plan plan = it.next();
+            if (i == 0) {
+                last = plan;
+            } else {
+                if (plan.getStart_time().before(last.end_time)) {
+                    it.remove();
+                } else {
+                    last = plan;
+                }
+            }
+            i++;
+        }
+        List<Integer> l = new ArrayList<>();
+        for (Plan plan : plans) {
+            l.add(plan.getMode());
+        }
+        return l;
+    }
+
+    @Data
+    static class Plan {
+        private String _id;
+        private Date start_time;
+        private Date end_time;
+        private Integer mode;
     }
 
 }
