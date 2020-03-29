@@ -334,6 +334,11 @@ public class Exercises {
         doCollectionSth(c);
     }
 
+    @Test
+    public void test11() {
+        System.out.println("aa".compareToIgnoreCase("A"));
+    }
+
     private void doArraySth(House[] c) {
         for (House house : c) {
             house.desc();
@@ -387,12 +392,12 @@ public class Exercises {
     @Data
     @Accessors(chain = true     //chain的中文含义是链式的，设置为true，则setter方法返回当前对象
 //            ,fluent = true //fluent的中文含义是流畅的，设置为true，则getter和setter方法的方法名都是基础属性名，且setter方法返回当前对象
-            ,prefix = "p" //prefix的中文含义是前缀，用于生成getter和setter方法的字段名会忽视指定前缀
+//            ,prefix = "p" //prefix的中文含义是前缀，用于生成getter和setter方法的字段名会忽视指定前缀
     )
 
     static class Plan {
         private String _id;
-        private Date pStart_time;
+        private Date start_time;
         private Date end_time;
         private Integer mode;
     }
