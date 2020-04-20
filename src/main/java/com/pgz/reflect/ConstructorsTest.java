@@ -73,4 +73,22 @@ public class ConstructorsTest {
     public static String getValue(String key) throws IOException {
         return pro.getProperty(key);//返回根据key获取的value值
     }
+
+    /**
+     * 反射调用构造方法创建对象
+     *
+     * @return
+     * @author liquan_pgz@qq.com
+     * date 2020-04-20
+     **/
+    @Test
+    public void test2() {
+        char a = 'd';
+        try {
+            Student student = Student.class.getConstructor(Character.TYPE).newInstance(a);
+            System.out.println(student);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
