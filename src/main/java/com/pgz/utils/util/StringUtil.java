@@ -1,4 +1,4 @@
-package com.pgz.util;
+package com.pgz.utils.util;
 
 /**
  * 字符串处理工具类

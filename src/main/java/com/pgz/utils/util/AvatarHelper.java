@@ -1,4 +1,4 @@
-package com.pgz.util;
+package com.pgz.utils.util;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

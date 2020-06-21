@@ -1,4 +1,4 @@
-package com.pgz.util;
+package com.pgz.utils.test;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
