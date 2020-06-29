@@ -26,7 +26,7 @@ public class CollectionUtil {
      * date 2020-06-29 10:11:06
      **/
     public static <T> void sort(List<Object> orderRegulation,
-                                List<T> targetList, Function<T> fun) {
+                                List<T> targetList, Get<T> fun) {
         if (ObjectUtil.isEmpty(targetList)) return;
 
         targetList.sort(((o1, o2) -> {
@@ -44,7 +44,7 @@ public class CollectionUtil {
         }));
     }
 
-    public interface Function<T> {
+    public interface Get<T> {
         Object get(T t);
     }
 }
