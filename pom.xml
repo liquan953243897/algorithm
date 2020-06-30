@@ -51,6 +51,15 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava https://ifeve.com/google-guava/ -->
+        <!-- guava就是类库，是java api的增强与扩展，里面有大量的方法供我们使用，使用之前需要引入包-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>28.1-jre</version>
+        </dependency>
+
     </dependencies>
 
 

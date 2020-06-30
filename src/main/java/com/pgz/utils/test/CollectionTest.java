@@ -1,6 +1,8 @@
 package com.pgz.utils.test;
 
 import cn.hutool.core.lang.Console;
+import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableList;
 import com.pgz.utils.util.CollectionUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +20,7 @@ import java.util.List;
  */
 public class CollectionTest {
 
-    private static final List<Student> LIST_STUDENT = new ArrayList<>();
+    private static final List<Student> LIST_STUDENT;
 
     private static final Student S_A = new Student("张三", 18);
 
@@ -29,10 +31,7 @@ public class CollectionTest {
     private static final Student S_D = new Student("钱六", 18);
 
     static {
-        LIST_STUDENT.add(S_A);
-        LIST_STUDENT.add(S_B);
-        LIST_STUDENT.add(S_C);
-        LIST_STUDENT.add(S_D);
+        LIST_STUDENT = ImmutableList.of(S_A, S_B, S_C, S_D);
     }
 
     @Test
@@ -43,7 +42,9 @@ public class CollectionTest {
         CollectionUtil.sort(orderRegulation, list, Student::getName);
 
         Console.print(list);
+        String join = Joiner.on(',').join(orderRegulation);
 
+        Console.print(join);
 
     }
 
