@@ -1,5 +1,6 @@
 package com.pgz.entity;
 
+import com.pgz.utils.translate.annotation.TranslateAtt;
 import lombok.Data;
 
 /**
@@ -15,4 +16,6 @@ public class Student {
 
     private int age;
 
+    @TranslateAtt(codeType = "sex")
+    private String sex;
 }
