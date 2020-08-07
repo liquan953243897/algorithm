@@ -48,4 +48,17 @@ public class TestSort {
         arrayBub.selectSort();
         arrayBub.display();
     }
+
+    @Test
+    public void testInsertSort() {
+        ArraySort arrayBub = new ArraySort(5);
+        arrayBub.add(5);
+        arrayBub.add(4);
+        arrayBub.add(3);
+        arrayBub.add(2);
+        arrayBub.add(1);
+        arrayBub.display();
+        arrayBub.insertionSort();
+        arrayBub.display();
+    }
 }

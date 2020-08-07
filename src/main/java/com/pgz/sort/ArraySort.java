@@ -79,6 +79,28 @@ public class ArraySort {
         }
     }
 
+    /**
+     * 插入排序，假定一部分为有序数组，用标记的一项与有序数组比较
+     *
+     * @return
+     * @author liquan_pgz@qq.com
+     * date 2020-08-07 15:31:31
+     **/
+    public void insertionSort() {
+        int in, out;
+        for (out = 1; out < nElem; out++) {
+            long temp = elem[out];
+            in = out;
+            while (in > 0 && elem[in - 1] >= temp) {
+                elem[in] = elem[in - 1];
+                in--;
+                time++;
+            }
+            elem[in] = temp;
+        }
+    }
+
+
     private void swap(int a, int b) {
         long temp = elem[a];
         elem[a] = elem[b];
