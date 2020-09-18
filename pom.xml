@@ -114,6 +114,14 @@
         </dependency>
         <!--sftp相关依赖结束-->
 
+        <!--mqtt相关依赖开始-->
+        <dependency>
+            <groupId>org.eclipse.paho</groupId>
+            <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <!--mqtt相关依赖结束-->
+
     </dependencies>
 
 
