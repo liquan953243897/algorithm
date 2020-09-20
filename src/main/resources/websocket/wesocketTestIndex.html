@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebsocketTestIndex</title>
+</head>
+<body>
+
+<h1>Websocket Test</h1>
+<script>
+    var socket;
+    if(typeof(WebSocket) == "undefined") {
+        console.log("Your browser not support WebSocket !");
+    }else{
+        console.log("Your browser support WebSocket");
+        // 实例化WebSocket对象
+        // 指定要连接的服务器地址与端口
+        // 建立连接
+        socket = new WebSocket("ws://localhost:10706/websocket/warning/2");
+        // 打开事件
+        socket.onopen = function() {
+            console.log("You has connect to WebSocketServer");
+        };
+        // 获得消息事件
+        socket.onmessage = function(msg) {
+            // 打印接收到的消息
+            console.log(msg.data);
+        };
+        // 关闭事件
+        socket.onclose = function() {
+            console.log("Socket has closed");
+        };
+        // 发生了错误事件
+        socket.onerror = function() {
+            alert("Socket happen an error !");
+        }
+    }
+</script>
+</body>
+</html>
