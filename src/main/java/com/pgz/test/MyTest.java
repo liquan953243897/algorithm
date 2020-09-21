@@ -11,7 +11,7 @@ import org.junit.Test;
 public class MyTest {
 
     /**
-     * Integer 内部存在缓存 -127~128
+     * Integer 内部存在缓存 -128~127
      *
      * @return
      * @author liquan_pgz@qq.com
