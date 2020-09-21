@@ -27,9 +27,10 @@ public class UDPServer {
             String sentence = new String(receivePacket.getData());
             //获取客户端地址
             InetAddress IPAddress = receivePacket.getAddress();
-            System.out.println(df.format(new Date()) + " from " + IPAddress + ": " + sentence);
+            int port1 = receivePacket.getPort();
+            System.out.println(df.format(new Date()) + " from " + IPAddress + ":" + port1 + "==" + sentence);
             //获得客户端端口号
-            int port = receivePacket.getPort();
+            int port = port1;
             String capitalizedSentence = sentence.toUpperCase();
             sendData = capitalizedSentence.getBytes();
             DatagramPacket sendPacket =
