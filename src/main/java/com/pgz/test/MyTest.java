@@ -1,5 +1,6 @@
 package com.pgz.test;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
 /**
@@ -23,6 +24,29 @@ public class MyTest {
         System.out.println(a == b);
         Integer c = 100, d = 100;
         System.out.println(c == d);
+    }
+
+    /**
+     * leftPad 左边填充数据
+     *
+     * @return
+     * @author liquan_pgz@qq.com
+     * date 2020-09-23
+     **/
+    @Test
+    public void testByte() {
+        byte byteValue = '\'';
+        // 将byte转换为8位二进制字符串 依赖 commons-lang-x.x.jar包
+        System.out.println(byteValue & 0xff);
+        String binaryString = StringUtils.leftPad(Integer.toBinaryString(byteValue & 0xff), 8, '0');
+        System.out.println(binaryString);
+    }
+
+    @Test
+    public void testPad() {
+        String a = "abc";
+        String b = "ab";
+        System.out.println(StringUtils.center(a, 7, "*"));
     }
 
 }
