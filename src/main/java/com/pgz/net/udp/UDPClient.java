@@ -21,7 +21,8 @@ public class UDPClient {
             DatagramSocket clientSocket = new DatagramSocket(port);
             BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
             //获取本地 IP 地址
-            InetAddress IPAddress = InetAddress.getLocalHost();
+//            InetAddress IPAddress = InetAddress.getLocalHost();
+            InetAddress IPAddress = InetAddress.getByName("192.168.242.59");
             byte[] sendData;
             byte[] receiveData = new byte[1024];
             System.out.println("请输入一句英文，服务器会返回其大写形式（输入exit退出）");

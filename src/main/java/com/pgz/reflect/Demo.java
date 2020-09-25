@@ -1,5 +1,7 @@
 package com.pgz.reflect;
 
+import org.junit.Test;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
@@ -11,7 +13,8 @@ import java.util.ArrayList;
  */
 public class Demo {
 
-    public static void main(String[] args) throws Exception{
+    @Test
+    public void tesMain() throws Exception{
         ArrayList<String> strList = new ArrayList<>();
         strList.add("aaa");
         strList.add("bbb");
