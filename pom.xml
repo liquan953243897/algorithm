@@ -86,12 +86,12 @@
 
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava https://ifeve.com/google-guava/ -->
         <!-- guava就是类库，是java api的增强与扩展，里面有大量的方法供我们使用，使用之前需要引入包-->
-<!--        暂时注掉，对hbase运行有冲突-->
-<!--        <dependency>-->
-<!--            <groupId>com.google.guava</groupId>-->
-<!--            <artifactId>guava</artifactId>-->
-<!--            <version>28.1-jre</version>-->
-<!--        </dependency>-->
+        <!--        暂时注掉，对hbase运行有冲突-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.google.guava</groupId>-->
+        <!--            <artifactId>guava</artifactId>-->
+        <!--            <version>28.1-jre</version>-->
+        <!--        </dependency>-->
 
         <!--sftp相关依赖开始-->
         <dependency>
@@ -136,7 +136,7 @@
         </dependency>
         <!-- websocket结束 -->
 
-        <!-- hbase -->
+        <!-- hbase 开始 -->
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-client</artifactId>
@@ -152,7 +152,9 @@
             <artifactId>hbase-protocol</artifactId>
             <version>${hbase.version}</version>
         </dependency>
-        <!-- hadoop -->
+        <!-- hbase 结束 -->
+
+        <!-- hadoop 开始-->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
@@ -220,6 +222,22 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- hadoop 结束-->
+
+        <!-- kafka开始 -->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>0.11.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-streams</artifactId>
+            <version>0.11.0.0</version>
+        </dependency>
+        <!-- kafka结束 -->
+
+
     </dependencies>
 
 
