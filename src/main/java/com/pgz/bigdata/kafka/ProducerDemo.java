@@ -26,7 +26,7 @@ public class ProducerDemo {
         props.put("linger.ms", 1);//延迟1ms发送，这项设置将通过增加小的延迟来完成--即，不是立即发送一条记录，producer将会等待给定的延迟时间以允许其他消息记录发送，这些消息记录可以批量处理
         props.put("buffer.memory", 33554432);//producer可以用来缓存数据的内存大小。
         props.put("key.serializer",
-                "org.apache.kafka.common.serialization.IntegerSerializer");
+                "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer",
                 "org.apache.kafka.common.serialization.StringSerializer");
 
@@ -37,14 +37,14 @@ public class ProducerDemo {
         int messageNo = 1;
         final int COUNT = 5;
 
-        while(messageNo < COUNT) {
+        while (messageNo < COUNT) {
             String key = String.valueOf(messageNo);
             String data = String.format("hello KafkaProducer message %s from hubo 06291018 ", key);
 
             System.out.println("发送消息内容如下：");
             System.out.println(data);
             try {
-                producer.send(new ProducerRecord<>(TOPIC, data));
+                producer.send(new ProducerRecord<>(TOPIC, key, data));
                 System.out.println("发送了一条");
             } catch (Exception e) {
                 e.printStackTrace();

@@ -29,14 +29,15 @@ public class UserKafkaConsumer extends Thread{
 
         KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<>(properties);
         kafkaConsumer.subscribe(Collections.singletonList("test5"));
-//        while (true) {
+        while (true) {
             ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
             for (ConsumerRecord<String, String> record : records) {
                 System.out.println("-----------------");
+                System.out.println("key========" + record.key());
                 System.out.printf("offset = %d, value = %s", record.offset(), record.value());
                 System.out.println();
             }
-//        }
+        }
 
     }
 
