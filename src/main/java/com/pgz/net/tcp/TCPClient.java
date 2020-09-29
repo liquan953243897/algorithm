@@ -1,7 +1,10 @@
 package com.pgz.net.tcp;
 
+import org.junit.Test;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
@@ -12,7 +15,10 @@ import java.net.Socket;
  * @date 2020-09-16
  */
 public class TCPClient {
-    public static void main(String[] args) throws Exception {
+
+
+    @Test
+    public void main() throws Exception {
         String sentence;
         String modifiedSentence;
         System.out.println("请输入一个英文字符串，服务器将返回其大写形式（输入exit退出）");
@@ -31,6 +37,37 @@ public class TCPClient {
             modifiedSentence = inFromServer.readLine();
             System.out.println("FROM SERVER: " + modifiedSentence);
             clientSocket.close();
+        }
+    }
+
+    public static void main(String[] a) {
+        for (int i1 = 0; i1 < 10; i1++) {
+            new Thread(new RunnableImp()).start();
+        }
+    }
+
+    private static class RunnableImp implements Runnable {
+
+        @Override
+        public void run() {
+            System.out.println("请输入一个英文字符串，服务器将返回其大写形式（输入exit退出）");
+            for (int i = 0; i < 30; i++) {
+                try {
+                    //创建客户端 Socket 并指明需要连接的服务器端的主机名及端口号，即用即时创建连接
+                    Socket clientSocket = new Socket("localhost", 6789);
+                    DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+                    BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                    //向服务器发送数据
+                    outToServer.writeBytes(Thread.currentThread().getName() + "序号" + i + '\n');
+                    //接收服务器返回数据
+                    String modifiedSentence;
+                    modifiedSentence = inFromServer.readLine();
+                    System.out.println("FROM SERVER: " + modifiedSentence);
+                    clientSocket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }
