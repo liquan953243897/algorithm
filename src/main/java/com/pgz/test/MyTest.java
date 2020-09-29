@@ -3,6 +3,9 @@ package com.pgz.test;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * //TODO 添加类/接口功能描述
  *
@@ -49,4 +52,23 @@ public class MyTest {
         System.out.println(StringUtils.center(a, 7, "*"));
     }
 
+    @Test
+    public void testGetTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        System.out.println(sdf.format(new Date()));
+    }
+
+    @Test
+    public void testByteArr() {
+        byte[] ba = {'%', 'w', 1, 3, 31};
+        System.out.println(ba);
+        for (byte b : ba) {
+            System.out.printf("%02x",b);//257701031f
+        }
+    }
+
+    @Test
+    public void testHex2Byte() {
+        System.out.println((byte)Integer.parseInt("1f",16));//31
+    }
 }
