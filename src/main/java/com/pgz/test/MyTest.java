@@ -71,4 +71,21 @@ public class MyTest {
     public void testHex2Byte() {
         System.out.println((byte)Integer.parseInt("1f",16));//31
     }
+
+    @Test
+    public void testByte2Str() {
+        byte b = 115;
+
+        System.out.println(new String(new byte[]{b}));
+    }
+
+    @Test
+    public void testStr2Byte() {
+        String str = "喜";
+
+        byte[] bytes = str.getBytes();
+        for (byte aByte : bytes) {
+            System.out.println(aByte);
+        }
+    }
 }
