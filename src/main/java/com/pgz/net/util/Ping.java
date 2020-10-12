@@ -76,7 +76,7 @@ public class Ping {
     }
 
     public static void main(String[] args) throws Exception {
-        String ipAddress = "127.0.0.1";
+        String ipAddress = "172.16.85.117";
         System.out.println(ping(ipAddress));
         ping02(ipAddress);
         System.out.println(ping(ipAddress, 5, 5000));

@@ -69,23 +69,33 @@ public class MyTest {
 
     @Test
     public void testHex2Byte() {
-        System.out.println((byte)Integer.parseInt("1f",16));//31
+        System.out.println((byte)Integer.parseInt("48",16));//31
     }
 
     @Test
     public void testByte2Str() {
-        byte b = 115;
+        byte b = -86;
 
         System.out.println(new String(new byte[]{b}));
     }
 
     @Test
     public void testStr2Byte() {
-        String str = "喜";
+        String str = "512";
 
         byte[] bytes = str.getBytes();
         for (byte aByte : bytes) {
             System.out.println(aByte);
         }
+    }
+
+    @Test
+    public void testByteToHex() {
+        byte b = -86;
+        String hex = Integer.toHexString(b & 0xFF);
+        if(hex.length() < 2){
+            hex = "0" + hex;
+        }
+        System.out.println(hex);
     }
 }
