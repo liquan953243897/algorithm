@@ -1,8 +1,14 @@
 {
   "desc": "平谷线配置解析文件",
-  "suffix": {
-    "49": "doo",
-    "50": "air"
+  "sysMap": {
+    "49": {
+      "suffix": "doo",
+      "cycle": 1
+    },
+    "50": {
+      "suffix": "air",
+      "cycle": 1
+    }
   },
   "time": {
     "start": 0,
