@@ -81,7 +81,7 @@ public class MyTest {
 
     @Test
     public void testHex2Byte() {
-        System.out.println((byte) Integer.parseInt("52", 16));//31
+        System.out.println((byte) Integer.parseInt("31", 16));//31
     }
 
     @Test

@@ -1,0 +1,19 @@
+{
+  "desc": "平谷线配置解析文件",
+  "suffix": {
+    "49": "doo",
+    "50": "air"
+  },
+  "time": {
+    "start": 0,
+    "count": 6
+  },
+  "trainId": {
+    "start": 6,
+    "count": 3
+  },
+  "sysType": {
+    "start": 9,
+    "count": 1
+  }
+}
