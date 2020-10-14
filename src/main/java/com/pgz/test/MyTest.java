@@ -85,6 +85,17 @@ public class MyTest {
     }
 
     @Test
+    public void testByte2Binary() {
+        byte b = -1;
+
+        System.out.println(b & 0xFF);//255
+
+        System.out.println(String.format("%8s",
+                Integer.toBinaryString(b & 0xFF))
+                .replace(' ', '0'));//11111111
+    }
+
+    @Test
     public void testByte2Str() {
         byte b = -86;
 
