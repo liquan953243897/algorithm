@@ -1,6 +1,7 @@
 package com.pgz.net.tcp.nio;
 
 import java.io.IOException;
+import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.ServerSocketChannel;
@@ -48,6 +49,7 @@ public class EchoSelectorProtocol implements Protocol {
     @Override
     public void handleRead(SelectionKey key) throws IOException {
         SocketChannel clntChan = (SocketChannel) key.channel();
+        SocketAddress localAddress = clntChan.getLocalAddress();
         //获取该信道所关联的附件，这里为缓冲区
         ByteBuffer buf = (ByteBuffer) key.attachment();
         long bytesRead = clntChan.read(buf);
