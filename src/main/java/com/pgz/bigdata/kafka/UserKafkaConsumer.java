@@ -21,7 +21,7 @@ public class UserKafkaConsumer extends Thread{
         properties.put("bootstrap.servers", "pgz:9092");//xxx是服务器集群的ip
         properties.put("group.id", "jd-group");
         properties.put("enable.auto.commit", "true");
-        properties.put("auto.commit.interval.ms", "1000");
+        properties.put("auto.commit.interval.ms", "5000");
         properties.put("auto.offset.reset", "latest");
         properties.put("session.timeout.ms", "30000");
         properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");

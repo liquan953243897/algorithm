@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -208,4 +209,72 @@ public class MyTest {
         System.out.println(1 << 1);
         System.out.println(1);
     }
+
+    @Test
+    public void testInt2ByteArray() {
+        System.out.println(Arrays.toString(intToByteArray(512)));
+        System.out.println(Arrays.toString(intToByteArray(512, 2)));
+    }
+
+
+    @Test
+    public void testByteArray2Int() {
+        System.out.println(byteArrayToInt(new byte[]{2, 0}));
+    }
+
+    /**
+     * int转byte数组
+     *
+     * @param i
+     * @return
+     * @author liquan_pgz@qq.com
+     * date 2020-10-19
+     **/
+    public static byte[] intToByteArray(int i) {
+        byte[] result = new byte[4];
+        // 由高位到低位
+        result[0] = (byte) ((i >> 24) & 0xFF);
+        result[1] = (byte) ((i >> 16) & 0xFF);
+        result[2] = (byte) ((i >> 8) & 0xFF);
+        result[3] = (byte) (i & 0xFF);
+        return result;
+    }
+
+    /**
+     * 指定字节位数
+     *
+     * @param value
+     * @param digit
+     * @return
+     * @author liquan_pgz@qq.com
+     * date 2020-10-19
+     **/
+    public static byte[] intToByteArray(int value, int digit) {
+        byte[] result = new byte[digit];
+        // 由高位到低位
+        for (int i = 0; i < digit; i++) {
+            result[i] = (byte) ((value >> (8 * (digit - i - 1))) & 0xFF);
+        }
+        return result;
+    }
+
+    /**
+     * 数组转int
+     *
+     * @param bytes
+     * @return
+     * @author liquan_pgz@qq.com
+     * date 2020-10-19
+     **/
+    public static int byteArrayToInt(byte[] bytes) {
+        int value = 0;
+        int size = bytes.length;
+        // 由高位到低位  
+        for (int i = 0; i < size; i++) {
+            int shift = (size - 1 - i) * 8;
+            value += (bytes[i] & 0xFF) << shift;// 往高位游
+        }
+        return value;
+    }
+
 }
