@@ -237,6 +237,13 @@
         </dependency>
         <!-- kafka结束 -->
 
+        <!--集成netty开始-->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.29.Final</version>
+        </dependency>
+        <!--集成netty结束-->
 
     </dependencies>
 
