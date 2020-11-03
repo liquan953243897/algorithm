@@ -17,33 +17,45 @@ import java.net.Socket;
 public class TCPClient {
 
 
-    @Test
-    public void main() throws Exception {
+//    @Test
+    public static void main1() throws Exception {
         String sentence;
         String modifiedSentence;
         System.out.println("请输入一个英文字符串，服务器将返回其大写形式（输入exit退出）");
+        //创建客户端 Socket 并指明需要连接的服务器端的主机名及端口号，即用即时创建连接
+        Socket clientSocket = null;
+        DataOutputStream outToServer = null;
         while (true) {
             BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
             sentence = inFromUser.readLine();
-            //创建客户端 Socket 并指明需要连接的服务器端的主机名及端口号，即用即时创建连接
-            Socket clientSocket = new Socket("localhost", 6789);
-            DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-            BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            if ("conn".equalsIgnoreCase(sentence)) {
+                clientSocket = new Socket("localhost", 6789);
+                outToServer = new DataOutputStream(clientSocket.getOutputStream());
+                clientSocket.setKeepAlive(true);
+                continue;
+            }
+//            BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
             if (sentence.equals("exit")) break;
             //向服务器发送数据
-            outToServer.writeBytes(sentence + '\n');
+            if (outToServer != null) {
+                outToServer.writeBytes(sentence + "\n");
+                System.out.println("写入了数据===" + sentence);
+            }
             //接收服务器返回数据
-            modifiedSentence = inFromServer.readLine();
-            System.out.println("FROM SERVER: " + modifiedSentence);
-            clientSocket.close();
+//            modifiedSentence = inFromServer.readLine();
+//            System.out.println("FROM SERVER: " + modifiedSentence);
+            if ("close".equalsIgnoreCase(sentence) && clientSocket != null) {
+                clientSocket.close();
+            }
         }
     }
 
-    public static void main(String[] a) {
-        for (int i1 = 0; i1 < 10; i1++) {
-            new Thread(new RunnableImp()).start();
-        }
+    public static void main(String[] a) throws Exception {
+//        for (int i1 = 0; i1 < 10; i1++) {
+//            new Thread(new RunnableImp()).start();
+//        }
+        main1();
     }
 
     private static class RunnableImp implements Runnable {
