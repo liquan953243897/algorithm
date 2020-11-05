@@ -1,5 +1,11 @@
 package com.pgz.utils.util;
 
+import com.pgz.test.MyTest;
+import org.apache.commons.lang.ArrayUtils;
+import org.junit.Test;
+
+import java.util.zip.CRC32;
+
 /**
  * CRC校验工具类
  *
@@ -42,6 +48,13 @@ public class CRC16Util {
         return cc;
     }
 
+    public static void main(String[] args) {
+        System.out.println(ArrayUtils.toString(appendCrc16(new byte[]{84, 69, 83, 84})));
+        byte[] byteCRC = get4byteCRC(new byte[]{84, 69, 83, 84});
+        System.out.println(ArrayUtils.toString(byteCRC));
+        System.out.println(MyTest.byteArrayToInt(byteCRC));
+    }
+
     /**
      * 获取验证码byte数组，基于Modbus CRC16的校验算法
      */
@@ -65,6 +78,7 @@ public class CRC16Util {
                     crc = crc >> 1;
             }
         }
+
         return intToBytes(crc);
     }
 
@@ -72,10 +86,36 @@ public class CRC16Util {
      * 将int转换成byte数组，低位在前，高位在后
      * 改变高低位顺序只需调换数组序号
      */
-    private static byte[] intToBytes(int value) {
-        byte[] src = new byte[2];
-        src[1] = (byte) ((value >> 8) & 0xFF);
-        src[0] = (byte) (value & 0xFF);
+    private static byte[] intToBytes(Integer value) {
+        byte[] src = new byte[4];
+        src[3] = (byte) (value & 0xFF);
+        src[2] = (byte) ((value >> 8) & 0xFF);
+        src[1] = (byte) (value >> 16 & 0xff);
+        src[0] = (byte) (value >> 24 & 0xff);
         return src;
+    }
+
+    public static byte[] get4byteCRC(byte[] buffer){
+        CRC32 crc32 = new CRC32();
+        crc32.update(buffer);
+        byte[] mCrc32Buf = new byte[2];
+        mCrc32Buf[0] = (byte)(crc32.getValue() & 0x000000FF);
+        mCrc32Buf[1] = (byte)((crc32.getValue() & 0x0000FF00) >> 8);
+        return mCrc32Buf;
+    }
+
+    public static byte[] get2ByteCRC(byte[] buffer){
+        int sum = 0;
+        for (byte b : buffer) {
+            sum += b;
+        }
+
+        return intToBytes(sum);
+    }
+
+    @Test
+    public void testInt2Bytes() {
+        byte[] bytes = get2ByteCRC(new byte[]{-86,-52,0,34,0,3,9,0,1,32,16,18,20,82,0,6,0,2,33,18,19,11,7,1,-1,-1,-1,-1,0,0,0,0});
+        System.out.println(ArrayUtils.toString(bytes));
     }
 }

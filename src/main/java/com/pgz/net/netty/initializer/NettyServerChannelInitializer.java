@@ -1,7 +1,6 @@
 package com.pgz.net.netty.initializer;
 
-import com.github.halosee.receive.server.handler.NettyServerHandler;
-import com.github.halosee.receive.service.DataReceiveService;
+import com.pgz.net.netty.handler.NettyServerHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.bytes.ByteArrayDecoder;
@@ -19,16 +18,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class NettyServerChannelInitializer extends ChannelInitializer<SocketChannel> {
 
-    /**
-     * 注入数据接收业务方法
-     */
-    @Autowired
-    private DataReceiveService receiveService;
-
     @Override
     protected void initChannel(SocketChannel channel) throws Exception {
         channel.pipeline().addLast("decoder", new ByteArrayDecoder());
         channel.pipeline().addLast("encoder", new StringEncoder(CharsetUtil.UTF_8));
-        channel.pipeline().addLast(new NettyServerHandler(receiveService));
+        channel.pipeline().addLast(new NettyServerHandler());
     }
 }
