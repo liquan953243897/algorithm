@@ -1,5 +1,7 @@
 package com.pgz.test;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
@@ -9,7 +11,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStream;
@@ -19,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * //TODO 添加类/接口功能描述
@@ -26,6 +29,7 @@ import java.util.Date;
  * @author liquan_pgz@qq.com
  * @date 2020-09-21
  */
+@Slf4j
 public class MyTest {
 
     /**
@@ -83,7 +87,11 @@ public class MyTest {
 
     @Test
     public void testHex2Byte() {
-        System.out.println((byte) Integer.parseInt("31", 16));//31
+        System.out.println((byte) Integer.parseInt("A5", 16));//31
+        byte[] bytes = hex2Bytes(new String[]{
+                "00", "C7"
+        });
+        System.out.println(ArrayUtils.toString(bytes));
     }
 
     @Test
@@ -116,12 +124,35 @@ public class MyTest {
 
     @Test
     public void testByteToHex() {
-        byte b = -86;
-        String hex = Integer.toHexString(b & 0xFF);
-        if (hex.length() < 2) {
-            hex = "0" + hex;
+//        byte b = 74;
+//        String hex = Integer.toHexString(b & 0xFF);
+//        if (hex.length() < 2) {
+//            hex = "0" + hex;
+//        }
+//        System.out.println(hex);
+
+        System.out.println(ArrayUtils.toString(bytes2Hex(new byte[]{
+                -86, -86, 0, 107, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -86, -52, 0, 89, 0, 2, 48, 8, 1, 86, 0, 0, 0, 0, 0, -73, 121, 53, 44, 30, 15, 0, -41, 0, 0, 0, -43, 0, 0, 0, -71, 0, 75, 111, 0, -38, -126, 0, 0, 0, -36, 0, 75, 0, 41, 0, 2, 0, -4, -54, 0, 14, 0, -124, 33, 8, 2, 0, -127, 0, 6, 0, -64, 0, -120, 0, 0, 85, 0, 106, 0, -25, 0, -98, 0, 1, 86, 0, 1, -31, 0, 50, 0, -53, 0, -47, 0, 19, -120, 21, -29
+        })).replace(",", " "));
+    }
+
+    public static String[] bytes2Hex(byte[] data) {
+        String[] hex = new String[data.length];
+        for (int i = 0; i < data.length; i++) {
+            hex[i] = Integer.toHexString(data[i] & 0xFF).toUpperCase();
+            if (hex[i].length() < 2) {
+                hex[i] = "0" + hex[i];
+            }
         }
-        System.out.println(hex);
+        return hex;
+    }
+
+    public static byte[] hex2Bytes(String[] hex) {
+        byte[] bytes = new byte[hex.length];
+        for (int i = 0; i < hex.length; i++) {
+            bytes[i] = (byte) Integer.parseInt(hex[i], 16);
+        }
+        return bytes;
     }
 
     @Test
@@ -220,7 +251,7 @@ public class MyTest {
 
     @Test
     public void testByteArray2Int() {
-        System.out.println(byteArrayToInt(new byte[]{2, 0}));
+        System.out.println(byteArrayToInt(new byte[]{0x00, 0x03, 0x0D, -91}));
     }
 
     @Test
@@ -324,4 +355,43 @@ public class MyTest {
         return value;
     }
 
+    @Test
+    public void testSet() {
+        Set<String> set = new HashSet<>();
+        set.add("a");
+        set.add("b");
+        set.add("c");
+        set.forEach(item -> {
+            if (item.equals("a")) {
+                item = "ad";
+            }
+        });
+        System.out.println(set);
+    }
+
+    @Test
+    public void testReplaceFirst() {
+        String toHex = "90AF";
+        System.out.println(toHex.charAt(0) == '0' ? toHex.substring(1) : toHex);
+    }
+
+    @Test
+    public void testInteger1() {
+        Integer a = 127, b = 128;
+
+        System.out.println(127 == a);
+        System.out.println(128 == b);
+    }
+
+    @Test
+    public void testNanoTime() {
+        long a = System.nanoTime();
+        int sum = 0;
+//        for (int i = 0; i < 100000; i++) {
+//            sum += i;
+//        }
+//        System.out.println(sum + "");
+        long b = System.nanoTime();
+        System.out.println(b - a);
+    }
 }
