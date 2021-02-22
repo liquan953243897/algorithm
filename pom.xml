@@ -16,6 +16,8 @@
     <properties>
         <hadoop.version>2.7.3</hadoop.version>
         <hbase.version>1.2.0</hbase.version>
+        <kafka.spring.version>2.2.1.RELEASE</kafka.spring.version>
+        <kafka.clients.version>2.0.0</kafka.clients.version>
     </properties>
 
     <build>
@@ -235,7 +237,24 @@
             <artifactId>kafka-streams</artifactId>
             <version>0.11.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.11</artifactId>
+            <version>0.10.1.1</version>
+        </dependency>
         <!-- kafka结束 -->
+        <!--引入kafka和spring整合的jar-->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+            <version>2.2.1.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.kafka</groupId>
+                    <artifactId>kafka-clients</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
         <!--集成netty开始-->
         <dependency>
@@ -252,6 +271,12 @@
             <version>2.3.2</version>
         </dependency>
 
+        <!--集成redis-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
+        </dependency>
     </dependencies>
 
 
