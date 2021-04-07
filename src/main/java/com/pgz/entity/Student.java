@@ -12,7 +12,9 @@ import lombok.Data;
 @Data
 public class Student {
 
-    private String name;
+    public volatile String home = "刘府";
+
+    public String name;
 
     private int age;
 

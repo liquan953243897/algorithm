@@ -32,7 +32,7 @@ public class TCPServerSelector {
         listnChannel.socket().bind(new InetSocketAddress(12345));
         //配置信道为非阻塞模式
         listnChannel.configureBlocking(false);
-        //将选择器注册到各个信道
+        //将选通道注册到选择器中
         listnChannel.register(selector, SelectionKey.OP_ACCEPT);
 //        for (String arg : args) {
 //            //实例化一个信道

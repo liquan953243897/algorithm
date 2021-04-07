@@ -46,8 +46,8 @@ public class ArraySort {
      **/
     public void bubbleSort() {
         int out, in;
-        for (out = nElem - 1; out > 1; out--) {
-            for (in = 0; in < out; in++) {
+        for (out = 0; out < nElem-1; out++) {
+            for (in = 0; in < nElem - out -1; in++) {
                 long a = elem[in];
                 long b = elem[in + 1];
                 if (a > b) {

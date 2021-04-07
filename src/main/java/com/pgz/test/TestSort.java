@@ -22,9 +22,10 @@ public class TestSort {
     public void testBubSort() {
         ArraySort arrayBub = new ArraySort(5);
         arrayBub.add(5);
-        arrayBub.add(4);
+        arrayBub.add(1);
         arrayBub.add(3);
         arrayBub.add(2);
+        arrayBub.add(6);
         arrayBub.display();
         arrayBub.bubbleSort();
         arrayBub.display();

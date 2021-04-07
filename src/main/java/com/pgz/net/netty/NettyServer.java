@@ -22,8 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class NettyServer {
 
-    @Autowired
-    private NettyServerChannelInitializer initializer;
+    private NettyServerChannelInitializer initializer = new NettyServerChannelInitializer();
 
     public void start(Integer port) {
         //配置服务端的NIO线程组
@@ -55,4 +54,8 @@ public class NettyServer {
         }
     }
 
+    public static void main(String[] args) {
+        NettyServer nettyServer = new NettyServer();
+        nettyServer.start(1111);
+    }
 }

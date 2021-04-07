@@ -37,15 +37,20 @@ public class ThreadPoolTest {
         //LinkedBlockingQueue   基于链表结构的阻塞队列，按FIFO排序任务，吞吐量通常要高于ArrayBlockingQueue
         //SynchronousQueue      一个不存储元素的阻塞队列，每个插入操作必须等到另一个线程调用移除操作，否则插入操作一直处于阻塞状态，吞吐量通常要高于LinkedBlockingQueue
         //PriorityBlockingQueue 具有优先级的无界阻塞队列
-        BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(2);
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(CORE_POOL_SIZE,  MAXIMUM_POOL_SIZE, 30, TimeUnit.SECONDS, queue);
+        BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(800);
+        System.out.println("CORE_POOL_SIZE = " + CORE_POOL_SIZE + ",MAXIMUM_POOL_SIZE = " + MAXIMUM_POOL_SIZE);
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(80,
+                92,
+                30, TimeUnit.SECONDS, queue);
 
         System.out.println("输出线程池大小==" + executor.getPoolSize());
-        for (int i = 0; i <= 7; i++){
-            executor.execute(new RunnableImpl());
+        long a = System.currentTimeMillis();
+        for (int i = 1; i <= 1000; i++){
+            executor.execute(new RunnableImpl(i));
         }
 
 //        executor.prestartAllCoreThreads();
+        System.out.println("耗时：" + (System.currentTimeMillis() - a));
 
         try {
             Thread.sleep(400);
@@ -57,14 +62,31 @@ public class ThreadPoolTest {
 
     static class RunnableImpl implements Runnable {
 
+        private volatile int anInt;
+
+        public RunnableImpl(int anInt) {
+            this.anInt = anInt;
+        }
+
+        public RunnableImpl() {
+        }
+
         @Override
         public void run() {
-            System.out.println("hello PGZ, I am [" + Thread.currentThread().getName() + "]");
+            System.out.println("hello PGZ, I am ["
+                    + Thread.currentThread().getName() + "],当前i=" + anInt);
             try {
-                Thread.sleep(2000);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+
+        @Override
+        public String toString() {
+            return "RunnableImpl{" +
+                    "anInt=" + anInt +
+                    '}';
         }
     }
 }

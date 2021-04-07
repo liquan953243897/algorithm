@@ -31,4 +31,10 @@ public class SimpleTest {
         haha.interrupt();
     }
 
+    @Test
+    public void tes() {
+        String a = "aa";
+        String[] split = a.split(a);
+        System.out.println(split);
+    }
 }
