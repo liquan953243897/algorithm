@@ -2,6 +2,7 @@ package com.pgz.test;
 
 import cn.hutool.json.JSONUtil;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.framework.AdvisedSupport;
 import org.springframework.aop.framework.AopProxy;
 import org.springframework.aop.support.AopUtils;
@@ -17,15 +18,21 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author wb_liquan02
  * @copyright: sankuai.com
  * @date 2021/8/9
  */
+@Slf4j
 @RestController
 @RequestMapping("test")
 public class ApiTestController {
@@ -53,19 +60,51 @@ public class ApiTestController {
             }
         }
 
-        Class<?> cls = bean.getClass();
-        Method[] methods = cls.getDeclaredMethods();
+        Collection<Method> methods = getMethods(bean);
 
         Object invoke = bean;
+        boolean flag = true;
         for (Method method : methods) {
             if (method.getName().equals(param.getApi()) && method.getParameterCount() == param.getParams().length) {
                 method.setAccessible(true);
                 invoke = method.invoke(bean, typeOf(param.getParams(), method.getParameters()));
+                flag = false;
                 break;
             }
         }
+        if (flag) {
+            log.error("未找到可调用的方法");
+        }
 
         return invoke;
+    }
+
+    private Map<String, Field> getFields(Object obj) {
+        Class<?> cls = obj.getClass();
+        return getFields(cls);
+    }
+
+    private List<Method> getMethods(Object obj) {
+        Class<?> cls = obj.getClass();
+        return getMethods(cls);
+    }
+
+    private Map<String, Field> getFields(Class<?> cls) {
+        List<Field> fieldList = new ArrayList<>();
+        while (cls != null) {
+            fieldList.addAll(Arrays.asList(cls.getDeclaredFields()));
+            cls = cls.getSuperclass();
+        }
+        return fieldList.stream().collect(Collectors.toMap(Field::getName, field -> field, (k1, k2) -> k2));
+    }
+
+    private List<Method> getMethods(Class<?> cls) {
+        List<Method> methodList = new ArrayList<>();
+        while (cls != null) {
+            methodList.addAll(Arrays.asList(cls.getDeclaredMethods()));
+            cls = cls.getSuperclass();
+        }
+        return methodList;
     }
 
     private Object[] typeOf(Object[] objArray, Parameter[] parameters) {
@@ -107,9 +146,7 @@ public class ApiTestController {
         Field advised = dynamicAdvisedInterceptor.getClass().getDeclaredField("advised");
         advised.setAccessible(true);
 
-        Object target = ((AdvisedSupport) advised.get(dynamicAdvisedInterceptor)).getTargetSource().getTarget();
-
-        return target;
+        return ((AdvisedSupport) advised.get(dynamicAdvisedInterceptor)).getTargetSource().getTarget();
     }
 
     private static Object getJdkDynamicProxyTargetObject(Object proxy) throws Exception {
@@ -120,9 +157,7 @@ public class ApiTestController {
         Field advised = aopProxy.getClass().getDeclaredField("advised");
         advised.setAccessible(true);
 
-        Object target = ((AdvisedSupport) advised.get(aopProxy)).getTargetSource().getTarget();
-
-        return target;
+        return ((AdvisedSupport) advised.get(aopProxy)).getTargetSource().getTarget();
     }
 
     @Data
